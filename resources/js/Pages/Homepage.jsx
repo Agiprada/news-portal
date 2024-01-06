@@ -5,11 +5,12 @@ import CardNews from "@/Components/Homepage/CardNews";
 import Pagination from "@/Components/Homepage/Pagination";
 
 export default function Homepage(props) {
+    console.log(props);
     return (
         <>
             <div className="min-h-screen bg-slate-50 ">
                 <Head title={props.title}></Head>
-                <Navbar />
+                <Navbar user={props.auth.user} />
                 {/* <h1>{props.description}</h1> */}
                 <div className="flex justify-center items-center flex-col lg:flex-row lg:flex-wrap lg:items-stretch gap-4 my-3">
                     <CardNews news={props.news.data} />
@@ -32,7 +33,7 @@ export default function Homepage(props) {
                     )} */}
                 </div>
                 <div className="flex justify-center">
-                    <Pagination />
+                    <Pagination meta={props.news.meta} />
                 </div>
             </div>
         </>

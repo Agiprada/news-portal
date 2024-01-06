@@ -1,6 +1,7 @@
+import { Link } from "@inertiajs/react";
 import React from "react";
 
-export default function Navbar() {
+export default function Navbar({ user }) {
     return (
         <div className="navbar bg-base-100">
             <div className="flex-1">
@@ -31,18 +32,40 @@ export default function Navbar() {
                         tabIndex={0}
                         className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
                     >
-                        <li>
-                            <a className="justify-between">
-                                Dashboard
-                                <span className="badge">New</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a>Settings</a>
-                        </li>
-                        <li>
-                            <a>Logout</a>
-                        </li>
+                        {!user ? (
+                            <>
+                                <li>
+                                    <Link href={route("login")}>Login</Link>
+                                </li>
+                                <li>
+                                    <Link href={route("register")}>
+                                        register
+                                    </Link>
+                                </li>
+                            </>
+                        ) : (
+                            <>
+                                <li>
+                                    <Link
+                                        href={route("dashboard")}
+                                        className="justify-between"
+                                    >
+                                        Dashboard
+                                        <span className="badge">New</span>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href={route("profile.edit")}>
+                                        Settings
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href={route("logout")} method="post">
+                                        Logout
+                                    </Link>
+                                </li>
+                            </>
+                        )}
                     </ul>
                 </div>
             </div>
